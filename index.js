@@ -16,6 +16,7 @@ module.exports = function hyperstream2 (updates) {
 
   // original html source, so we can slice from it
   var source = ''
+  var savedIndex = 0
 
   // parsed element stack
   var stack = []
@@ -54,13 +55,19 @@ module.exports = function hyperstream2 (updates) {
     if (replacing) return
     // TODO avoid this `.push()` → `.shift()` dance when it is not necessary,
     // eg when we are only pushing lots of strings and never wait for a stream
-    queued.push(val)
-    if (!piping) push()
+    if (typeof val === 'string' && queued.length > 0 && typeof queued[queued.length - 1] === 'string') {
+      queued[queued.length - 1] += val
+    } else {
+      queued.push(val)
+      if (!piping) push()
+    }
   }
 
   // Get the original source for the thing being parsed right now
   function slice () {
-    return source.slice(parser.startIndex, parser.endIndex + 1)
+    source = source.slice(parser.startIndex - savedIndex)
+    savedIndex = parser.startIndex
+    return source.slice(0, parser.endIndex + 1 - savedIndex)
   }
 
   // Check if the current element stack matches a selector

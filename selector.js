@@ -67,5 +67,3 @@ function checkAttr (el, part) {
 function checkTag (el, part) {
   return el.tagName === part.name
 }
-
-
