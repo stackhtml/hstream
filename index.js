@@ -23,9 +23,8 @@ module.exports = function hyperstream2 (updates) {
 
   // output chunks that were not yet written
   var queued = []
-  // whether we are currently busy piping a stream into the output
-  // →  newly queued chunks should wait for that stream to finish
-  var piping = false
+  // whether new output chunks should be queued
+  var queueWaiting = false
   // true when we are replacing element contents
   // →  we should ignore results from the parser
   var replacing = false
@@ -33,18 +32,18 @@ module.exports = function hyperstream2 (updates) {
   var stream = through(onchunk, onend)
   return stream
 
+  function onqueueready () {
+    queueWaiting = false
+    push()
+  }
+  function onsourceforward (chunk) { stream.push(chunk) }
   function push () {
     if (queued.length === 0) return
     var next = queued.shift()
     if (isStream(next)) {
-      piping = true
-      eos(next, function () {
-        piping = false
-        push()
-      })
-      next.on('data', function (chunk) {
-        stream.push(chunk)
-      })
+      queueWaiting = true
+      eos(next, onqueueready)
+      next.on('data', onsourceforward)
       next.on('error', onerror)
     } else {
       stream.push(next)
@@ -53,13 +52,17 @@ module.exports = function hyperstream2 (updates) {
   }
   function queue (val) {
     if (replacing) return
-    // TODO avoid this `.push()` → `.shift()` dance when it is not necessary,
-    // eg when we are only pushing lots of strings and never wait for a stream
+    // tack this on to another queued string if it's there to save some `.push()` calls
     if (typeof val === 'string' && queued.length > 0 && typeof queued[queued.length - 1] === 'string') {
       queued[queued.length - 1] += val
     } else {
       queued.push(val)
-      if (!piping) push()
+      // defer calling `push` until the end of this parse tick;
+      // this way a lot more strings can end up concatenated into one
+      if (!queueWaiting) {
+        queueWaiting = true
+        process.nextTick(onqueueready)
+      }
     }
   }
 
