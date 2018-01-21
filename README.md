@@ -4,6 +4,11 @@ streaming html templates
 
 like [hyperstream](https://github.com/substack/hyperstream), but faster. it does not support all hyperstream features.
 
+currently unsupported:
+
+ - inserting text; only html is supported
+ - prepending or appending to attributes
+
 [![npm][npm-image]][npm-url]
 [![travis][travis-image]][travis-url]
 [![standard][standard-image]][standard-url]
