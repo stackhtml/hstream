@@ -2,8 +2,8 @@ var HTMLParser = require('htmlparser2').Parser
 var through = require('through2')
 var parseSelector = require('./selector')
 
-module.exports = function hyperstream2 (updates) {
-  if (typeof updates !== 'object') throw new TypeError('hyperstream2: updates must be object')
+module.exports = function hstream (updates) {
+  if (typeof updates !== 'object') throw new TypeError('hstream: updates must be object')
 
   var parser = new HTMLParser({
     onopentag: onopentag,

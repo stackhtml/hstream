@@ -1,4 +1,4 @@
-# hyperstream2
+# hstream
 
 streaming html templates
 
@@ -13,23 +13,23 @@ currently unsupported:
 [![travis][travis-image]][travis-url]
 [![standard][standard-image]][standard-url]
 
-[npm-image]: https://img.shields.io/npm/v/hyperstream2.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/hyperstream2
-[travis-image]: https://img.shields.io/travis/goto-bus-stop/hyperstream2.svg?style=flat-square
-[travis-url]: https://travis-ci.org/goto-bus-stop/hyperstream2
+[npm-image]: https://img.shields.io/npm/v/hstream.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/hstream
+[travis-image]: https://img.shields.io/travis/goto-bus-stop/hstream.svg?style=flat-square
+[travis-url]: https://travis-ci.org/goto-bus-stop/hstream
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard-url]: http://npm.im/standard
 
 ## Install
 
 ```
-npm install hyperstream2
+npm install hstream
 ```
 
 ## Usage
 
 ```js
-var hyperstream = require('hyperstream2')
+var hyperstream = require('hstream')
 
 hyperstream({
   'div > .x[attr="value"]': fs.createReadStream('./xyz.html')
@@ -60,7 +60,7 @@ for the following special operations:
 All properties accept streams and strings.
 
 ```js
-hyperstream2({
+hstream({
   '#a': someReadableStream(), // replace content with a stream
   '#b': 'a string value', // replace content with a string
   // prepend and append some html
@@ -89,13 +89,13 @@ ok ~5.67 s (5 s + 673399368 ns)
 # hyperstream small file
 ok ~946 ms (0 s + 946487806 ns)
 
-# hyperstream2 single
+# hstream single
 ok ~1.16 s (1 s + 159528184 ns)
 
-# hyperstream2 many
+# hstream many
 ok ~951 ms (0 s + 951094352 ns)
 
-# hyperstream2 small file
+# hstream small file
 ok ~70 ms (0 s + 70058016 ns)
 
 all benchmarks completed

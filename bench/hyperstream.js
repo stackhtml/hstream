@@ -48,7 +48,7 @@ bench('hyperstream small file', function (b) {
   }
 })
 
-bench('hyperstream2 single', function (b) {
+bench('hstream single', function (b) {
   var hyperstream = require('../')
   var left = 10
 
@@ -63,7 +63,7 @@ bench('hyperstream2 single', function (b) {
   }
 })
 
-bench('hyperstream2 many', function (b) {
+bench('hstream many', function (b) {
   var hyperstream = require('../')
   var left = 10
 
@@ -75,7 +75,7 @@ bench('hyperstream2 many', function (b) {
   stream.pipe(sink(b.end))
 })
 
-bench('hyperstream2 small file', function (b) {
+bench('hstream small file', function (b) {
   var hyperstream = require('../')
   var left = 10
 

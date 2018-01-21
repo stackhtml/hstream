@@ -1,4 +1,4 @@
-# hyperstream2 change log
+# hstream change log
 
 All notable changes to this project will be documented in this file.
 

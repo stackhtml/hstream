@@ -1,10 +1,10 @@
 {
-  "name": "hyperstream2",
+  "name": "hstream",
   "description": "streaming html templates",
   "version": "0.0.0",
   "author": "Renée Kooi <renee@kooi.me>",
   "bugs": {
-    "url": "https://github.com/goto-bus-stop/hyperstream2/issues"
+    "url": "https://github.com/goto-bus-stop/hstream/issues"
   },
   "dependencies": {
     "css-what": "^2.1.0",
@@ -18,7 +18,7 @@
     "standard": "^10.0.3",
     "tape": "^4.8.0"
   },
-  "homepage": "https://github.com/goto-bus-stop/hyperstream2",
+  "homepage": "https://github.com/goto-bus-stop/hstream",
   "keywords": [
     "html",
     "stream",
@@ -28,7 +28,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/goto-bus-stop/hyperstream2.git"
+    "url": "https://github.com/goto-bus-stop/hstream.git"
   },
   "scripts": {
     "bench": "node bench/hyperstream.js",
