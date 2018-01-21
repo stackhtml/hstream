@@ -36,6 +36,42 @@ hyperstream({
 })
 ```
 
+## API
+
+### `hyperstream(updates)`
+
+Create a through stream that applies `updates`. `updates` is an object with CSS
+selectors for keys. Values can be different types depending on what sort of
+update you want to do.
+
+Selectors support the most common CSS features, like matching tag names,
+classes, IDs, attributes. Pseudo selectors are not supported, but PRs are
+welcome.
+
+Pass a stream or string to replace the matching element's contents with some
+HTML. Pass an object to set attributes on the matching element or do some
+special operations. When passing an object, you can use keys prefixed with `_`
+for the following special operations:
+
+ - `_html` - Replace the matching element's contents with some HTML
+ - `_prependHtml` - Prepend some HTML to the matching element
+ - `_appendHtml` - Append some HTML to the matching element
+
+All properties accept streams and strings.
+
+```js
+hyperstream({
+  '#a': someReadableStream(), // replace content with a stream
+  '#b': 'a string value', // replace content with a string
+  // prepend and append some html
+  '#c': { _prependHtml: 'here comes the <b>content</b>: ', _appendHtml: ' …that\'s all folks!' },
+  // replace content with a stream and set an attribute `attr="value"`
+  '#d': { _html: someReadableStream(), 'attr': 'value' },
+  // set an attribute `data-whatever` to a streamed value
+  '#e': { 'data-whatever': someReadableStream() }
+})
+```
+
 ## License
 
 [Apache-2.0](LICENSE.md)
