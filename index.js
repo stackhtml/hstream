@@ -21,6 +21,7 @@ module.exports = function hyperstream2 (updates) {
 
   // parsed element stack
   var stack = []
+  var selfClosingIndex = 0
 
   // output chunks that were not yet written
   var queued = []
@@ -102,6 +103,7 @@ module.exports = function hyperstream2 (updates) {
 
   function onopentag (name, attrs) {
     var el = { tagName: name, attrs: attrs }
+    selfClosingIndex = parser.startIndex
     stack.push(el)
 
     var match = matches()
@@ -138,6 +140,9 @@ module.exports = function hyperstream2 (updates) {
   function onclosetag (name) {
     var el = stack.pop()
     if (el.replaceContents) replacing = false // stop replacing
+
+    if (selfClosingIndex === parser.startIndex) return
+
     if (el.update) {
       if (el.update._appendHtml) {
         queue(el.update._appendHtml)
