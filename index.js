@@ -1,6 +1,5 @@
 var HTMLParser = require('htmlparser2').Parser
 var through = require('through2')
-var eos = require('end-of-stream')
 var parseSelector = require('./selector')
 
 module.exports = function hyperstream2 (updates) {
@@ -42,9 +41,10 @@ module.exports = function hyperstream2 (updates) {
     var next = queued.shift()
     if (isStream(next)) {
       queueWaiting = true
-      eos(next, onqueueready)
+      next.on('end', onqueueready)
       next.on('data', onsourceforward)
       next.on('error', onerror)
+      next.resume()
     } else {
       stream.push(next)
       push()
@@ -56,6 +56,13 @@ module.exports = function hyperstream2 (updates) {
     if (typeof val === 'string' && queued.length > 0 && typeof queued[queued.length - 1] === 'string') {
       queued[queued.length - 1] += val
     } else {
+      // pause streams; so we don't miss any data events once we are ready
+      if (isStream(val)) {
+        // `.pause()` is advisory in node streams, so pipe it through `through()` which
+        // will always buffer
+        val = val.pipe(through())
+        val.pause()
+      }
       queued.push(val)
       // defer calling `push` until the end of this parse tick;
       // this way a lot more strings can end up concatenated into one
@@ -98,7 +105,6 @@ module.exports = function hyperstream2 (updates) {
     var match = matches()
     var tag = slice()
     if (match) {
-      // console.error('matched', match, stack)
       if (hasAttrs(match.update)) {
         addAttrs(tag, match.update).forEach(queue)
       } else {
@@ -191,4 +197,4 @@ function addAttrs (str, update) {
   return attrs
 }
 
-function isStream (o) { return typeof o === 'object' && o && o.pipe }
+function isStream (o) { return Boolean(typeof o === 'object' && o && o.pipe) }
