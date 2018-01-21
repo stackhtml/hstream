@@ -1,1 +1,2 @@
 require('./html')
+require('./streams')
