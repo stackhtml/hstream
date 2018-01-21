@@ -35,6 +35,30 @@ bench('hyperstream2 single', function (b) {
   }
 })
 
+bench('hyperstream many', function (b) {
+  var hyperstream = require('hyperstream')
+  var left = 10
+
+  b.start()
+  var stream = fs.createReadStream(npmjs)
+  while (left-- > 0) {
+    stream = stream.pipe(hyperstream({ '#npm-expansion': 'benchmark: ' + left + ' left' }))
+  }
+  stream.pipe(sink(b.end))
+})
+
+bench('hyperstream2 many', function (b) {
+  var hyperstream = require('../')
+  var left = 10
+
+  b.start()
+  var stream = fs.createReadStream(npmjs)
+  while (left-- > 0) {
+    stream = stream.pipe(hyperstream({ '#npm-expansion': 'benchmark: ' + left + ' left' }))
+  }
+  stream.pipe(sink(b.end))
+})
+
 function sink (cb) {
   return new Writable({
     write: function (chunk, enc, next) { next() },
