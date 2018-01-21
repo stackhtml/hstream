@@ -12,6 +12,8 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
+    "hyperstream": "^1.2.2",
+    "nanobench": "^2.1.0",
     "simple-concat": "^1.0.0",
     "standard": "^10.0.3",
     "tape": "^4.8.0"
