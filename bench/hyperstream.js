@@ -21,35 +21,8 @@ bench('hyperstream single', function (b) {
   }
 })
 
-bench('hyperstream2 single', function (b) {
-  var hyperstream = require('../')
-  var left = 10
-
-  b.start()
-  next()
-
-  function next () {
-    if (left-- === 0) return b.end()
-    fs.createReadStream(npmjs)
-      .pipe(hyperstream({ '#npm-expansion': 'benchmark' }))
-      .pipe(sink(next))
-  }
-})
-
 bench('hyperstream many', function (b) {
   var hyperstream = require('hyperstream')
-  var left = 10
-
-  b.start()
-  var stream = fs.createReadStream(npmjs)
-  while (left-- > 0) {
-    stream = stream.pipe(hyperstream({ '#npm-expansion': 'benchmark: ' + left + ' left' }))
-  }
-  stream.pipe(sink(b.end))
-})
-
-bench('hyperstream2 many', function (b) {
-  var hyperstream = require('../')
   var left = 10
 
   b.start()
@@ -73,6 +46,33 @@ bench('hyperstream small file', function (b) {
       .pipe(hyperstream({ '[data-react-helmet]': 'benchmark' }))
       .pipe(sink(next))
   }
+})
+
+bench('hyperstream2 single', function (b) {
+  var hyperstream = require('../')
+  var left = 10
+
+  b.start()
+  next()
+
+  function next () {
+    if (left-- === 0) return b.end()
+    fs.createReadStream(npmjs)
+      .pipe(hyperstream({ '#npm-expansion': 'benchmark' }))
+      .pipe(sink(next))
+  }
+})
+
+bench('hyperstream2 many', function (b) {
+  var hyperstream = require('../')
+  var left = 10
+
+  b.start()
+  var stream = fs.createReadStream(npmjs)
+  while (left-- > 0) {
+    stream = stream.pipe(hyperstream({ '#npm-expansion': 'benchmark: ' + left + ' left' }))
+  }
+  stream.pipe(sink(b.end))
 })
 
 bench('hyperstream2 small file', function (b) {
