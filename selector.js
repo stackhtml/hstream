@@ -1,12 +1,9 @@
 var csswhat = require('css-what')
 
-module.exports = parseSelector
+module.exports = createMatcher
 
-function parseSelector (sel) {
-  return createMatcher(csswhat(sel))
-}
-
-function createMatcher (selectors) {
+function createMatcher (sel) {
+  var selectors = csswhat(sel)
   return function (stack) {
     return selectors.some(function (parts) {
       return match(stack, parts)
@@ -14,6 +11,8 @@ function createMatcher (selectors) {
   }
 }
 
+// check if a parsed selector `parts` matches the element ancestor list `stack`.
+// `stack` elements are objects with at least a `.tagName`, and an object `.attrs`
 function match (stack, parts) {
   var si = stack.length - 1
   for (var i = parts.length - 1; i >= 0; i--) {
