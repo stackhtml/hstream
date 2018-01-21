@@ -60,7 +60,7 @@ for the following special operations:
 All properties accept streams and strings.
 
 ```js
-hyperstream({
+hyperstream2({
   '#a': someReadableStream(), // replace content with a stream
   '#b': 'a string value', // replace content with a string
   // prepend and append some html
@@ -70,6 +70,36 @@ hyperstream({
   // set an attribute `data-whatever` to a streamed value
   '#e': { 'data-whatever': someReadableStream() }
 })
+```
+
+## Benchmarks
+
+Run `npm run bench`.
+
+```
+NANOBENCH version 2
+> node bench/hyperstream.js
+
+# hyperstream single
+ok ~5.38 s (5 s + 381237046 ns)
+
+# hyperstream many
+ok ~5.67 s (5 s + 673399368 ns)
+
+# hyperstream small file
+ok ~946 ms (0 s + 946487806 ns)
+
+# hyperstream2 single
+ok ~1.16 s (1 s + 159528184 ns)
+
+# hyperstream2 many
+ok ~951 ms (0 s + 951094352 ns)
+
+# hyperstream2 small file
+ok ~70 ms (0 s + 70058016 ns)
+
+all benchmarks completed
+ok ~14 s (14 s + 181804772 ns)
 ```
 
 ## License
