@@ -14,6 +14,7 @@
   "devDependencies": {
     "hyperstream": "^1.2.2",
     "nanobench": "^2.1.0",
+    "rimraf": "^2.6.2",
     "simple-concat": "^1.0.0",
     "standard": "^10.0.3",
     "tape": "^4.8.0"
@@ -31,7 +32,8 @@
     "url": "https://github.com/goto-bus-stop/hstream.git"
   },
   "scripts": {
-    "bench": "node bench/hyperstream.js",
+    "bench": "node bench/hstream.js",
+    "compare": "node bench/hyperstream.js > bench/hyperstream.txt && node bench/hstream.js > bench/hstream.txt && nanobench-compare bench/*.txt; rimraf bench/*.txt",
     "test": "standard && node test/index.js"
   }
 }
