@@ -110,7 +110,7 @@ module.exports = function hstream (updates) {
     var tag = slice()
     if (match) {
       if (hasAttrs(match.update)) {
-        addAttrs(tag, match.update).forEach(queue)
+        addAttrs(tag, attrs, match.update).forEach(queue)
       } else {
         queue(tag)
       }
@@ -186,19 +186,20 @@ function hasAttrs (update) {
 }
 // insert attributes into an html open tag string
 //
-//    addAttrs('<div a="b">', { c: 'd' })
+//    addAttrs('<div a="b">', { a: 'b' }, { c: 'd' })
 //    → <div a="b" c="d">
-function addAttrs (str, update) {
+function addAttrs (str, existing, update) {
   var attrs = []
 
   // split the tag into two parts: `<tagname attrs` and `>` (or `/>` for self closing)
-  var x = str.match(/^(.*?)(\/?>)$/)
+  var x = str.match(/^(<\S+)(?:.*?)(\/?>)$/)
   attrs.push(x[1])
 
-  var k = Object.keys(update)
+  var newAttrs = Object.assign({}, existing, update)
+  var k = Object.keys(newAttrs)
   for (var i = 0; i < k.length; i++) {
     if (k[i][0] === '_') continue
-    attrs.push(' ' + k[i] + '="', update[k[i]], '"')
+    attrs.push(' ' + k[i] + '="', newAttrs[k[i]], '"')
   }
   attrs.push(x[2])
   return attrs
