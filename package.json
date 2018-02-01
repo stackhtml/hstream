@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "css-what": "^2.1.0",
+    "dedent": "^0.7.0",
     "htmlparser2": "^3.9.2",
     "through2": "^2.0.3"
   },

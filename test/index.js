@@ -1,3 +1,4 @@
 require('./html')
 require('./streams')
 require('./self-closing')
+require('./fun-times')

@@ -7,6 +7,8 @@ module.exports = function hstream (updates) {
 
   var parser = new HTMLParser({
     onopentag: onopentag,
+    onprocessinginstruction: onprocessinginstruction,
+    oncomment: oncomment,
     ontext: ontext,
     onclosetag: onclosetag,
     onend: onparseend,
@@ -101,6 +103,13 @@ module.exports = function hstream (updates) {
     parser.end()
   }
 
+  function onprocessinginstruction (name, data) {
+    // HACK to force htmlparser2 to update its startIndex and endIndex
+    // Hopefully this check is good enough to be future proof
+    if (parser.endIndex === null) parser._updatePosition(2)
+    queue(slice())
+  }
+
   function onopentag (name, attrs) {
     var el = { tagName: name, attrs: attrs }
     selfClosingIndex = parser.startIndex
@@ -130,6 +139,11 @@ module.exports = function hstream (updates) {
     } else {
       queue(tag)
     }
+  }
+
+  function oncomment (text) {
+    // just pass comments through unchanged
+    queue(slice())
   }
 
   function ontext (text) {
