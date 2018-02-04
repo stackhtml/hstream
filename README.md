@@ -77,30 +77,42 @@ hstream({
 
 Run `npm run bench`.
 
+hstream:
+
 ```
 NANOBENCH version 2
-> node bench/hyperstream.js
+> /usr/bin/node bench/hstream.js
 
-# hyperstream single
-ok ~5.38 s (5 s + 381237046 ns)
+# 10× single transform
+ok ~794 ms (0 s + 794449201 ns)
 
-# hyperstream many
-ok ~5.67 s (5 s + 673399368 ns)
+# many transforms
+ok ~595 ms (0 s + 594909989 ns)
 
-# hyperstream small file
-ok ~946 ms (0 s + 946487806 ns)
-
-# hstream single
-ok ~1.16 s (1 s + 159528184 ns)
-
-# hstream many
-ok ~951 ms (0 s + 951094352 ns)
-
-# hstream small file
-ok ~70 ms (0 s + 70058016 ns)
+# small file
+ok ~20 ms (0 s + 19878309 ns)
 
 all benchmarks completed
-ok ~14 s (14 s + 181804772 ns)
+ok ~1.41 s (1 s + 409237499 ns)
+```
+
+hyperstream:
+
+```
+NANOBENCH version 2
+> /usr/bin/node bench/hyperstream.js
+
+# 10× single transform
+ok ~4.7 s (4 s + 697728691 ns)
+
+# many transforms
+ok ~5.02 s (5 s + 23333119 ns)
+
+# small file
+ok ~740 ms (0 s + 739903018 ns)
+
+all benchmarks completed
+ok ~10 s (10 s + 460964828 ns)
 ```
 
 ## License
