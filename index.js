@@ -112,12 +112,22 @@ module.exports = function hstream (updates) {
 
   function onopentag (name, attrs) {
     var el = { tagName: name, attrs: attrs }
-    selfClosingIndex = parser.startIndex
     stack.push(el)
+    selfClosingIndex = parser.startIndex
 
     var match = matches()
     var tag = slice()
     if (match) {
+      // store the update object so we can use it in the close tag handler
+      el.update = match.update
+
+      // replacing the entire element; don't push the open tag
+      if (match.update._replaceHtml) {
+        replacing = true
+        el.replaceOuter = true
+        return
+      }
+
       if (hasAttrs(match.update)) {
         addAttrs(tag, attrs, match.update).forEach(queue)
       } else {
@@ -129,13 +139,9 @@ module.exports = function hstream (updates) {
       }
 
       if (match.update._html) {
-        queue(match.update._html)
         replacing = true
         el.replaceContents = true
       }
-
-      // store the update object so we can use it in the close tag handler
-      el.update = match.update
     } else {
       queue(tag)
     }
@@ -153,7 +159,16 @@ module.exports = function hstream (updates) {
 
   function onclosetag (name) {
     var el = stack.pop()
-    if (el.replaceContents) replacing = false // stop replacing
+    // replaced the entire element; don't push the closing tag
+    if (el.replaceOuter) {
+      replacing = false
+      queue(el.update._replaceHtml)
+      return
+    }
+    if (el.replaceContents) {
+      replacing = false // stop replacing
+      queue(el.update._html)
+    }
 
     if (selfClosingIndex === parser.startIndex) return
 

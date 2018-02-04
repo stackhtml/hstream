@@ -2,7 +2,7 @@ var test = require('tape')
 var concat = require('simple-concat')
 var hyperstream = require('../')
 
-test('replace html with a string', function (t) {
+test('replace contents with a string', function (t) {
   var hs = hyperstream({
     '#a': { _html: 'it worked' }
   })
@@ -14,7 +14,7 @@ test('replace html with a string', function (t) {
   hs.end('<div id="a">it did not work</div>')
 })
 
-test('replace html with a bare string', function (t) {
+test('replace contents with a bare string', function (t) {
   var hs = hyperstream({
     '#a': 'it worked'
   })
@@ -26,7 +26,7 @@ test('replace html with a bare string', function (t) {
   hs.end('<div id="a">it did not work</div>')
 })
 
-test('replace html with a stream', function (t) {
+test('replace contents with a stream', function (t) {
   var hs = hyperstream({
     '#a': { _html: 'it worked' }
   })
@@ -72,4 +72,16 @@ test('prepend and append html', function (t) {
     t.end()
   })
   hs.end('<div id="a">def</div>')
+})
+
+test('replace element', function (t) {
+  var hs = hyperstream({
+    '#slot': { _replaceHtml: '<div id="xyz">new element</div>' }
+  })
+  concat(hs, function (err, result) {
+    t.ifError(err)
+    t.equal(result + '', '<div id="a"><div id="xyz">new element</div></div>')
+    t.end()
+  })
+  hs.end('<div id="a"><x id="slot">template slot</x></div>')
 })
