@@ -15,8 +15,8 @@ currently unsupported:
 
 [npm-image]: https://img.shields.io/npm/v/hstream.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/hstream
-[travis-image]: https://img.shields.io/travis/goto-bus-stop/hstream.svg?style=flat-square
-[travis-url]: https://travis-ci.org/goto-bus-stop/hstream
+[travis-image]: https://img.shields.io/travis/stackhtml/hstream.svg?style=flat-square
+[travis-url]: https://travis-ci.org/stackhtml/hstream
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard-url]: http://npm.im/standard
 

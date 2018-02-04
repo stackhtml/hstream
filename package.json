@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "author": "Renée Kooi <renee@kooi.me>",
   "bugs": {
-    "url": "https://github.com/goto-bus-stop/hstream/issues"
+    "url": "https://github.com/stackhtml/hstream/issues"
   },
   "dependencies": {
     "css-what": "^2.1.0",
@@ -20,7 +20,7 @@
     "standard": "^10.0.3",
     "tape": "^4.8.0"
   },
-  "homepage": "https://github.com/goto-bus-stop/hstream",
+  "homepage": "https://github.com/stackhtml/hstream",
   "keywords": [
     "html",
     "stream",
@@ -30,7 +30,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/goto-bus-stop/hstream.git"
+    "url": "https://github.com/stackhtml/hstream.git"
   },
   "scripts": {
     "bench": "node bench/hstream.js",
