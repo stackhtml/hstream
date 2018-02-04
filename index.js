@@ -118,6 +118,14 @@ module.exports = function hstream (updates) {
     var match = matches()
     var tag = slice()
     if (match) {
+      // replacing the entire element; don't push the open tag
+      if (match.update._replaceHtml) {
+        queue(match.update._replaceHtml)
+        replacing = true
+        el.replaceOuter = true
+        return
+      }
+
       if (hasAttrs(match.update)) {
         addAttrs(tag, attrs, match.update).forEach(queue)
       } else {
@@ -153,6 +161,11 @@ module.exports = function hstream (updates) {
 
   function onclosetag (name) {
     var el = stack.pop()
+    // replaced the entire element; don't push the closing tag
+    if (el.replaceOuter) {
+      replacing = false
+      return
+    }
     if (el.replaceContents) replacing = false // stop replacing
 
     if (selfClosingIndex === parser.startIndex) return

@@ -56,6 +56,7 @@ for the following special operations:
  - `_html` - Replace the matching element's contents with some HTML
  - `_prependHtml` - Prepend some HTML to the matching element
  - `_appendHtml` - Append some HTML to the matching element
+ - `_replaceHtml` - Replace the entire element with some HTML
 
 All properties accept streams and strings.
 
