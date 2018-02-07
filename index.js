@@ -173,11 +173,11 @@ module.exports = function hstream (updates) {
     // replaced the entire element; don't push the closing tag
     if (el.replaceOuter) {
       replacing = false
-      var html = el.update._replaceHtml
-      if (typeof html === 'function') {
-        html = html(sliceReplaced(el.replaceIndex, parser.endIndex + 1))
+      var replaceHtml = el.update._replaceHtml
+      if (typeof replaceHtml === 'function') {
+        replaceHtml = replaceHtml(sliceReplaced(el.replaceIndex, parser.endIndex + 1))
       }
-      queue(html)
+      queue(replaceHtml)
       return
     }
     if (el.replaceContents) {
