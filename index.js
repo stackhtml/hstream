@@ -56,7 +56,6 @@ module.exports = function hstream (updates) {
     }
   }
   function queue (val) {
-    if (replacing) return
     // tack this on to another queued string if it's there to save some `.push()` calls
     if (typeof val === 'string' && queued.length > 0 && typeof queued[queued.length - 1] === 'string') {
       queued[queued.length - 1] += val
@@ -104,6 +103,7 @@ module.exports = function hstream (updates) {
   }
 
   function onprocessinginstruction (name, data) {
+    if (replacing) return
     // HACK to force htmlparser2 to update its startIndex and endIndex
     // Hopefully this check is good enough to be future proof
     if (parser.endIndex === null) parser._updatePosition(2)
@@ -114,6 +114,7 @@ module.exports = function hstream (updates) {
     var el = { tagName: name, attrs: attrs }
     stack.push(el)
     selfClosingIndex = parser.startIndex
+    if (replacing) return
 
     var match = matches()
     var tag = slice()
@@ -148,11 +149,13 @@ module.exports = function hstream (updates) {
   }
 
   function oncomment (text) {
+    if (replacing) return
     // just pass comments through unchanged
     queue(slice())
   }
 
   function ontext (text) {
+    if (replacing) return
     // just pass text through unchanged
     queue(slice())
   }
@@ -171,6 +174,7 @@ module.exports = function hstream (updates) {
     }
 
     if (selfClosingIndex === parser.startIndex) return
+    if (replacing) return
 
     if (el.update) {
       if (el.update._appendHtml) {
