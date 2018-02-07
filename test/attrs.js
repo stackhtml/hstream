@@ -25,3 +25,27 @@ test('replace an attribute', function (t) {
   })
   hs.end('<div class="it did not work" id="a"></div>')
 })
+
+test('prepend to attribute', function (t) {
+  var hs = hyperstream({
+    '#a': { class: { prepend: 'it ' } }
+  })
+  concat(hs, function (err, result) {
+    t.ifError(err)
+    t.equal(result + '', '<div class="it worked" id="a"></div>')
+    t.end()
+  })
+  hs.end('<div class="worked" id="a"></div>')
+})
+
+test('append to attribute', function (t) {
+  var hs = hyperstream({
+    '#a': { class: { append: ' worked' } }
+  })
+  concat(hs, function (err, result) {
+    t.ifError(err)
+    t.equal(result + '', '<div class="it worked" id="a"></div>')
+    t.end()
+  })
+  hs.end('<div class="it" id="a"></div>')
+})

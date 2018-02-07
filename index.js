@@ -228,7 +228,16 @@ function addAttrs (str, existing, update) {
   var k = Object.keys(newAttrs)
   for (var i = 0; i < k.length; i++) {
     if (k[i][0] === '_') continue
-    attrs.push(' ' + k[i] + '="', newAttrs[k[i]], '"')
+    var value = newAttrs[k[i]]
+    attrs.push(' ' + k[i] + '="')
+    if (typeof value === 'object' && !isStream(value)) {
+      if (value.prepend) attrs.push(value.prepend)
+      attrs.push(existing[k[i]])
+      if (value.append) attrs.push(value.append)
+    } else {
+      attrs.push(value)
+    }
+    attrs.push('"')
   }
   attrs.push(x[2])
   return attrs
