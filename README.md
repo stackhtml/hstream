@@ -60,6 +60,14 @@ for the following special operations:
 
 All properties accept streams and strings.
 
+`_html` and `_replaceHtml` can also be a function. Then they are called with
+the html contents of the element being replaced, and should return a stream or
+a string.
+
+When setting attributes, you can also use a function that receives the value of
+the attribute as the only parameter and that returns a stream or string with
+the new contents.
+
 ```js
 hstream({
   '#a': someReadableStream(), // replace content with a stream
@@ -69,7 +77,11 @@ hstream({
   // replace content with a stream and set an attribute `attr="value"`
   '#d': { _html: someReadableStream(), 'attr': 'value' },
   // set an attribute `data-whatever` to a streamed value
-  '#e': { 'data-whatever': someReadableStream() }
+  '#e': { 'data-whatever': someReadableStream() },
+  // replace an element with something that depends on the current value
+  '#f': { _html: function (input) { return input.toUpperCase() } },
+  // replace an attribute with something that depends on its current value
+  '#g': { class: function (current) { return cx(current, 'other-class') } }
 })
 ```
 
