@@ -232,7 +232,12 @@ function addAttrs (str, existing, update) {
   var k = Object.keys(newAttrs)
   for (var i = 0; i < k.length; i++) {
     if (k[i][0] === '_') continue
+
     var value = newAttrs[k[i]]
+    if (typeof value === 'function') value = value(existing[k[i]] || '')
+
+    if (value == null) continue
+
     attrs.push(' ' + k[i] + '="')
     if (typeof value === 'object' && !isStream(value)) {
       if (value.prepend) attrs.push(value.prepend)
