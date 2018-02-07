@@ -85,3 +85,33 @@ test('replace element', function (t) {
   })
   hs.end('<div id="a"><x id="slot">template slot</x></div>')
 })
+
+test('edit html', function (t) {
+  var hs = hyperstream({
+    '#test': function (contents) {
+      return contents.toUpperCase()
+    }
+  })
+  concat(hs, function (err, result) {
+    t.ifError(err)
+    t.equal(result + '', '<div id="test">THIS IS UPPERCASE</div>')
+    t.end()
+  })
+  hs.end('<div id="test">this is uppercase</div>')
+})
+
+test('edit outer html', function (t) {
+  var hs = hyperstream({
+    '#slot': {
+      _replaceHtml: function (input) {
+        return '<div>' + input.replace(/</g, '&lt;') + '</div>'
+      }
+    }
+  })
+  concat(hs, function (err, result) {
+    t.ifError(err)
+    t.equal(result + '', '<div id="a"><div>&lt;x id="slot">template slot&lt;/x></div></div>')
+    t.end()
+  })
+  hs.end('<div id="a"><x id="slot">template slot</x></div>')
+})

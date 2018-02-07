@@ -83,6 +83,12 @@ module.exports = function hstream (updates) {
     savedIndex = parser.startIndex
     return source.slice(0, parser.endIndex + 1 - savedIndex)
   }
+  function sliceReplaced (start, end) {
+    var result = source.slice(start - savedIndex, end - savedIndex)
+    source = source.slice(end - savedIndex)
+    savedIndex = end
+    return result
+  }
 
   // Check if the current element stack matches a selector
   // If it does, return the update object for the matching selector
@@ -125,6 +131,7 @@ module.exports = function hstream (updates) {
       // replacing the entire element; don't push the open tag
       if (match.update._replaceHtml) {
         replacing = true
+        el.replaceIndex = parser.startIndex
         el.replaceOuter = true
         return
       }
@@ -141,6 +148,7 @@ module.exports = function hstream (updates) {
 
       if (match.update._html) {
         replacing = true
+        el.replaceIndex = parser.endIndex + 1
         el.replaceContents = true
       }
     } else {
@@ -165,12 +173,20 @@ module.exports = function hstream (updates) {
     // replaced the entire element; don't push the closing tag
     if (el.replaceOuter) {
       replacing = false
-      queue(el.update._replaceHtml)
+      var html = el.update._replaceHtml
+      if (typeof html === 'function') {
+        html = html(sliceReplaced(el.replaceIndex, parser.endIndex + 1))
+      }
+      queue(html)
       return
     }
     if (el.replaceContents) {
       replacing = false // stop replacing
-      queue(el.update._html)
+      var html = el.update._html
+      if (typeof html === 'function') {
+        html = html(sliceReplaced(el.replaceIndex, parser.startIndex))
+      }
+      queue(html)
     }
 
     if (selfClosingIndex === parser.startIndex) return
