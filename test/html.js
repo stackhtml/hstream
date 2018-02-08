@@ -122,6 +122,7 @@ test('append and set attribute on child', function (t) {
     '.row i': { name: 'foo' }
   })
   concat(hs, function (err, body) {
+    t.ifError(err)
     t.equal(body + '', '<div class="row"><i name="foo">so</i> <b>wow</b></div>')
     t.end()
   })
