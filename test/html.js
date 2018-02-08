@@ -115,3 +115,15 @@ test('edit outer html', function (t) {
   })
   hs.end('<div id="a"><x id="slot">template slot</x></div>')
 })
+
+test('append and set attribute on child', function (t) {
+  var hs = hyperstream({
+    '.row': { _appendHtml: '<b>wow</b>' },
+    '.row i': { name: 'foo' }
+  })
+  concat(hs, function (err, body) {
+    t.equal(body + '', '<div class="row"><i name="foo">so</i> <b>wow</b></div>')
+    t.end()
+  })
+  hs.end('<div class="row"><i>so</i> </div>')
+})
