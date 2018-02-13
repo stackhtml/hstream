@@ -240,31 +240,32 @@ function hasAttrs (update) {
 function addAttrs (str, existing, update) {
   var attrs = []
 
-  // split the tag into two parts: `<tagname attrs` and `>` (or `/>` for self closing)
-  var x = str.match(/^(<\S+)(?:.*?)(\/?>)$/)
-  attrs.push(x[1])
+  // split the tag into two parts: `<tagname` and `>` (or `/>` for self closing)
+  var tagParts = str.match(/^(<\S+)(?:.*?)(\/?>)$/)
+  attrs.push(tagParts[1])
 
   var newAttrs = Object.assign({}, existing, update)
   var k = Object.keys(newAttrs)
   for (var i = 0; i < k.length; i++) {
     if (k[i][0] === '_') continue
+    var attr = k[i]
 
-    var value = newAttrs[k[i]]
-    if (typeof value === 'function') value = value(existing[k[i]] || '')
+    var value = newAttrs[attr]
+    if (typeof value === 'function') value = value(existing[attr] || '')
 
     if (value == null) continue
 
-    attrs.push(' ' + k[i] + '="')
+    attrs.push(' ' + attr + '="')
     if (typeof value === 'object' && !isStream(value)) {
       if (value.prepend) attrs.push(value.prepend)
-      attrs.push(existing[k[i]])
+      attrs.push(existing[attr])
       if (value.append) attrs.push(value.append)
     } else {
       attrs.push(value)
     }
     attrs.push('"')
   }
-  attrs.push(x[2])
+  attrs.push(tagParts[2])
   return attrs
 }
 
