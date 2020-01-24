@@ -1,4 +1,4 @@
-var csswhat = require('css-what')
+var csswhat = require('css-what').parse
 
 module.exports = createMatcher
 

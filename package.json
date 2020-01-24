@@ -7,18 +7,18 @@
     "url": "https://github.com/stackhtml/hstream/issues"
   },
   "dependencies": {
-    "css-what": "^2.1.0",
-    "htmlparser2": "^3.9.2",
-    "through2": "^2.0.3"
+    "css-what": "^3.2.1",
+    "htmlparser2": "^4.0.0",
+    "through2": "^3.0.1"
   },
   "devDependencies": {
     "dedent": "^0.7.0",
     "hyperstream": "^1.2.2",
-    "nanobench": "^2.1.0",
-    "rimraf": "^2.6.2",
+    "nanobench": "^2.1.1",
+    "rimraf": "^2.7.1",
     "simple-concat": "^1.0.0",
     "standard": "^10.0.3",
-    "tape": "^4.8.0"
+    "tape": "^4.13.0"
   },
   "homepage": "https://github.com/stackhtml/hstream",
   "keywords": [
