@@ -15,9 +15,9 @@
     "dedent": "^0.7.0",
     "hyperstream": "^1.2.2",
     "nanobench": "^2.1.1",
-    "rimraf": "^2.7.1",
+    "rimraf": "^3.0.0",
     "simple-concat": "^1.0.0",
-    "standard": "^10.0.3",
+    "standard": "^14.0.0",
     "tape": "^4.13.0"
   },
   "homepage": "https://github.com/stackhtml/hstream",
