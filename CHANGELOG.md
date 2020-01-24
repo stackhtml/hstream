@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.0
+
+ * Update dependencies. hstream now requires Node.js 8 or up.
+
 ## 1.2.0
 
  * Add ability to append or prepend to attributes (https://github.com/stackhtml/hstream/commit/e9b71c39d5a08d27b2ee09ae3043abcecd57b3db)
