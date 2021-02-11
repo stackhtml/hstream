@@ -29,16 +29,16 @@ npm install hstream
 ## Usage
 
 ```js
-var hyperstream = require('hstream')
+var hstream = require('hstream')
 
-hyperstream({
+hstream({
   'div > .x[attr="value"]': fs.createReadStream('./xyz.html')
 })
 ```
 
 ## API
 
-### `hyperstream(updates)`
+### `hstream(updates)`
 
 Create a through stream that applies `updates`. `updates` is an object with CSS
 selectors for keys. Values can be different types depending on what sort of
