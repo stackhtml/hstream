@@ -9,7 +9,7 @@
   "dependencies": {
     "css-what": "^4.0.0",
     "htmlparser2": "^6.0.0",
-    "through2": "^3.0.1"
+    "through2": "^4.0.2"
   },
   "devDependencies": {
     "dedent": "^0.7.0",
