@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.0
+
+ * Update dependencies. This major version bump is out of caution in case the parsing for the underlying HTML or CSS selector libraries changed.
+
 ## 2.0.0
 
  * Update dependencies. hstream now requires Node.js 8 or up.
