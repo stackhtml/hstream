@@ -10,13 +10,13 @@ currently unsupported:
  - prepending or appending to attributes
 
 [![npm][npm-image]][npm-url]
-[![travis][travis-image]][travis-url]
+[![actions][actions-image]][actions-url]
 [![standard][standard-image]][standard-url]
 
 [npm-image]: https://img.shields.io/npm/v/hstream.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/hstream
-[travis-image]: https://img.shields.io/travis/stackhtml/hstream.svg?style=flat-square
-[travis-url]: https://travis-ci.org/stackhtml/hstream
+[actions-image]: https://github.com/stackhtml/hstream/workflows/CI/badge.svg
+[actions-url]: https://github.com/stackhtml/hstream/actions?query=workflow%3ACI
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard-url]: http://npm.im/standard
 
