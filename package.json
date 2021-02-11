@@ -38,6 +38,7 @@
   "scripts": {
     "bench": "node bench/hstream.js",
     "compare": "node bench/hyperstream.js > bench/hyperstream.txt && node bench/hstream.js > bench/hstream.txt && nanobench-compare bench/*.txt; rimraf bench/*.txt",
-    "test": "standard && node test/index.js"
+    "lint": "standard",
+    "test": "node test/index.js"
   }
 }
