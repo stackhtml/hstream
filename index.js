@@ -112,7 +112,7 @@ module.exports = function hstream (updates) {
     if (replacing) return
     // HACK to force htmlparser2 to update its startIndex and endIndex
     // Hopefully this check is good enough to be future proof
-    if (parser.endIndex === null) parser._updatePosition(2)
+    if (parser.endIndex === null) parser.updatePosition(2)
     queue(slice())
   }
 
