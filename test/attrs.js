@@ -100,29 +100,3 @@ test('edit attribute with streams', function (t) {
   })
   hs.end('<div class="classname" id="a"></div>')
 })
-
-test('complex attribute selector', function (t) {
-  var hs = hyperstream({
-    'div[class^="it"][class$="work"]': { class: 'it worked' }
-  })
-  concat(hs, function (err, result) {
-    t.ifError(err)
-    t.equal(result + '', '<div id="a"><div class="it worked"></div></div>')
-    t.end()
-  })
-  hs.end('<div id="a"><div class="it should work"></div></div>')
-})
-
-test('attributes w/ newlines', function (t) {
-  var hs = hyperstream({
-    '#a': { class: 'it worked' }
-  })
-  concat(hs, function (err, result) {
-    t.ifError(err)
-    t.equal(result + '', '<div class="it worked" id="a"></div>')
-    t.end()
-  })
-  hs.end(`<div class="it
-    should work"
-    id="a"></div>`)
-})
