@@ -241,7 +241,7 @@ function addAttrs (str, existing, update) {
   var attrs = []
 
   // split the tag into two parts: `<tagname` and `>` (or `/>` for self closing)
-  var tagParts = str.match(/^(<\S+)(?:.*?)(\/?>)$/)
+  var tagParts = str.match(/^(<\S+)(?:[\s\S]*?)(\/?>)$/)
   attrs.push(tagParts[1])
 
   var newAttrs = Object.assign({}, existing, update)

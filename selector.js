@@ -54,13 +54,21 @@ function checkAttr (el, part) {
   }
 
   var attr = el.attrs[part.name]
-  if (part.action === 'start') {
+  if (!attr) {
+    return false
+  } else if (part.action === 'start') {
     attr = attr.slice(0, part.value.length)
   } else if (part.action === 'end') {
     attr = attr.slice(-part.value.length)
   }
 
-  return part.ignoreCase ? attr.toLowerCase() === part.value.toLowerCase() : attr === part.value
+  var value = part.value
+  if (part.ignoreCase) {
+    attr = attr.toLowerCase()
+    value = value.toLowerCase()
+  }
+
+  return part.name === 'class' ? attr.split(' ').includes(value) : attr === value
 }
 
 function checkTag (el, part) {
