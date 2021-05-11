@@ -96,16 +96,16 @@ NANOBENCH version 2
 > /usr/bin/node bench/hstream.js
 
 # 10× single transform
-ok ~794 ms (0 s + 794449201 ns)
+ok ~233 ms (0 s + 232898600 ns)
 
 # many transforms
-ok ~595 ms (0 s + 594909989 ns)
+ok ~159 ms (0 s + 158674007 ns)
 
 # small file
-ok ~20 ms (0 s + 19878309 ns)
+ok ~11 ms (0 s + 11377188 ns)
 
 all benchmarks completed
-ok ~1.41 s (1 s + 409237499 ns)
+ok ~403 ms (0 s + 402949795 ns)
 ```
 
 hyperstream:
@@ -115,16 +115,16 @@ NANOBENCH version 2
 > /usr/bin/node bench/hyperstream.js
 
 # 10× single transform
-ok ~4.7 s (4 s + 697728691 ns)
+ok ~1.84 s (1 s + 841403862 ns)
 
 # many transforms
-ok ~5.02 s (5 s + 23333119 ns)
+ok ~1.69 s (1 s + 694201406 ns)
 
 # small file
-ok ~740 ms (0 s + 739903018 ns)
+ok ~101 ms (0 s + 101124108 ns)
 
 all benchmarks completed
-ok ~10 s (10 s + 460964828 ns)
+ok ~3.64 s (3 s + 636729376 ns)
 ```
 
 ## License
