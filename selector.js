@@ -62,7 +62,13 @@ function checkAttr (el, part) {
     attr = attr.slice(-part.value.length)
   }
 
-  return part.ignoreCase ? attr.toLowerCase() === part.value.toLowerCase() : attr === part.value
+  var value = part.value
+  if (part.ignoreCase) {
+    attr = attr.toLowerCase()
+    value = value.toLowerCase()
+  }
+
+  return part.name === 'class' ? attr.split(' ').includes(value) : attr === value
 }
 
 function checkTag (el, part) {
