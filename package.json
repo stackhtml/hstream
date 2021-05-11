@@ -1,7 +1,7 @@
 {
   "name": "hstream",
   "description": "streaming html templates",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "Renée Kooi <renee@kooi.me>",
   "bugs": {
     "url": "https://github.com/stackhtml/hstream/issues"
