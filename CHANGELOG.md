@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.1.0
+
+* Add support for partial class matching, e.g. `.foo` -> `<div class="foo bar"></div>`
+* Fix complex attribute selectors, e.g. `[class^="hello"]`
+* Fix crash on attributes with newline characters
+
 ## 3.0.0
 
  * Update dependencies. This major version bump is out of caution in case the parsing for the underlying HTML or CSS selector libraries changed.
