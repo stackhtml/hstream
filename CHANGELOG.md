@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.1.1
+
+* Update `css-what`, resolving denial of service warning
+
 ## 3.1.0
 
 * Add support for partial class matching, e.g. `.foo` -> `<div class="foo bar"></div>`
