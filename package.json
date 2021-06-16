@@ -7,7 +7,7 @@
     "url": "https://github.com/stackhtml/hstream/issues"
   },
   "dependencies": {
-    "css-what": "^4.0.0",
+    "css-what": "^5.0.1",
     "htmlparser2": "^6.0.0",
     "through2": "^4.0.2"
   },
