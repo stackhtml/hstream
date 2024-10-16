@@ -12,10 +12,10 @@
     "through2": "^4.0.2"
   },
   "devDependencies": {
-    "dedent": "^0.7.0",
+    "dedent": "^1.5.3",
     "eslint": "^9.12.0",
     "hyperstream": "^1.2.2",
-    "nanobench": "^2.1.1",
+    "nanobench": "^3.0.0",
     "neostandard": "^0.11.6",
     "rimraf": "^3.0.0",
     "simple-concat": "^1.0.0",
